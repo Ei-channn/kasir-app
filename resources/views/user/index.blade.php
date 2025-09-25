@@ -2,6 +2,16 @@
 @section('content')
 <div class="container mt-4">
     <h1>Users</h1>
+    @if (@session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @elseif (@session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+        
     <div class="card">
         <div class="card-header">
             <a href="{{route('users.create')}}" class="btn btn-primary btn-sm">Tambah User</a>
@@ -23,7 +33,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
-                            <td>{{ $user->role }}</td>
+                            <td>{{ $user->role_id }}</td>
                             <td>
                                 <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning btn-sm">Edit</a>
                                 <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
